@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "Fedora", "/usr/share/mediawiki/skins/Fedora", type: "sshfs"
 
   # Ansible needs the guest to have these
-  config.vm.provision "shell", inline: "sudo dnf install -y libselinux-python python2-dnf"
+  config.vm.provision "shell", inline: "sudo dnf install -y libselinux-python python2-dnf libsemanage-python"
 
   config.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/playbook.yml"

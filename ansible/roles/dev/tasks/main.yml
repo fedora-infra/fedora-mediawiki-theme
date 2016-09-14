@@ -1,4 +1,9 @@
 ---
+
+- seboolean: name=httpd_can_network_connect_db state=yes persistent=yes
+
+- seboolean: name=httpd_use_fusefs state=yes persistent=yes
+
 - name: Install packages
   dnf:
       name: "{{ item }}"
@@ -17,9 +22,6 @@
     dest: /etc/httpd/conf.d/mediawiki.conf
     regexp: "# Alias /wiki /var/www/wiki"
     replace: "Alias /wiki /var/www/wiki"
-
-- name: disable SELinux
-  shell: setenforce 0
 
 - service:
     name: httpd
