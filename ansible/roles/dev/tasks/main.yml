@@ -1,0 +1,37 @@
+---
+- name: Install packages
+  dnf:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - mediawiki
+      - postgresql-devel
+      - php-pgsql
+
+- replace:
+    dest: /etc/httpd/conf.d/mediawiki.conf
+    regexp: "# Alias /wiki/skins /usr/share/mediawiki/skins"
+    replace: "Alias /wiki/skins /usr/share/mediawiki/skins"
+
+- replace:
+    dest: /etc/httpd/conf.d/mediawiki.conf
+    regexp: "# Alias /wiki /var/www/wiki"
+    replace: "Alias /wiki /var/www/wiki"
+
+- name: disable SELinux
+  shell: setenforce 0
+
+- service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: setup mediawiki
+  shell: php /usr/share/mediawiki/maintenance/install.php --dbuser mediawikiuser --confpath /var/www/wiki --dbname mediawikidb --dbport 5432 --dbserver 127.0.0.1 --dbtype postgres --lang en --pass "password" fedora admin
+  args:
+      creates: /var/www/wiki/LocalSettings.php
+
+- replace:
+    dest: /var/www/wiki/LocalSettings.php
+    regexp: "vector"
+    replace: "fedora"

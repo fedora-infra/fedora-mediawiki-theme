@@ -1,0 +1,56 @@
+{
+	"name": "Fedora",
+	"version": "1.0",
+	"author": "...",
+	"url": "https://pagure.io/fedora-mediawikitheme",
+	"descriptionmsg": "fedora-desc",
+	"namemsg": "skinname-fedora",
+	"license-name": "CC0-1.0",
+	"type": "skin",
+	"ValidSkinNames": {
+		"fedora": "Fedora"
+	},
+	"MessagesDirs": {
+		"Fedora": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"skins.fedora": {
+			"class": "ResourceLoaderSkinModule",
+			"position": "top",
+			"styles": {
+				"resources/libraries/normalise.css": {
+					"media": "screen"
+				},
+				"resources/screen-common.less": {
+					"media": "screen"
+				},
+				"resources/screen-desktop.less": {
+					"media": "screen and (min-width: 751px)"
+				},
+				"resources/screen-mobile.less": {
+					"media": "screen and (max-width: 750px)"
+				},
+				"resources/print.css": {
+					"media": "print"
+				}
+			}
+		},
+		"skins.fedora.js": {
+			"position": "bottom",
+			"scripts": [
+				"resources/main.js"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteSkinPath": "Fedora"
+	},
+	"AutoloadClasses": {
+		"SkinFedora": "Fedora.skin.php",
+		"FedoraTemplate": "FedoraTemplate.php"
+	},
+	"manifest_version": 1
+}
