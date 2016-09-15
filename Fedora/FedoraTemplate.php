@@ -11,7 +11,81 @@ class FedoraTemplate extends BaseTemplate {
 	public function execute() {
 		$this->html( 'headelement' );
 		?>
-		<div id="mw-wrapper">
+		<?php
+		echo Html::openElement(
+			'div',
+			array( 'class' => 'navbar navbar-full masthead' )
+		);
+
+		echo Html::openElement(
+			'div',
+			array( 'class' => 'container-fluid' )
+		);
+
+		echo Html::rawElement(
+			'img',
+			array(
+				'src' => $this->data[ 'logopath' ],
+				'alt' => $this->data[ 'sitename' ],
+				'height' => '40px',
+			)
+		);
+
+		echo Html::openElement(
+			'ul',
+			array( 'class' => 'nav navbar-nav pull-xs-right' )
+		);
+
+		echo Html::openElement(
+			'li',
+			array( 'class' => 'nav-item dropdown' )
+		);
+
+		echo Html::openElement(
+			'a',
+			array( 'class' => 'nav-link dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#', 'role' => 'button' )
+		);
+		echo Html::rawElement(
+			'img',
+			array(
+				'src' => 'https://seccdn.libravatar.org/avatar/de5bf8d06663adb3bb1b8d49ccab259828fad7dddeb233b073d0c447d79b4c14?s=24&d=retro',
+			)
+		);
+		echo Html::closeElement( 'a' );
+		echo '<ul class="dropdown-menu dropdown-menu-right">';
+		foreach ( $this->getPersonalTools() as $key => $item ) {
+			echo $this->makeListItem( $key, $item , array('link-class'=>'dropdown-item'));
+		}
+    echo '</ul>';
+
+		echo Html::closeElement( 'li' );
+
+		echo Html::closeElement( 'ul' );
+
+
+		echo Html::closeElement( 'div' );
+		echo Html::closeElement( 'div' );
+
+		?>
+
+
+		<div class="bodycontent container-fluid p-t-2">
+			<?php
+
+			// Page editing and tools
+			echo Html::rawElement(
+				'div',
+				array( 'id' => 'page-tools' ),
+				$this->getPageLinks()
+			);
+			// Site navigation/sidebar
+			echo Html::rawElement(
+				'div',
+				array( 'id' => 'site-navigation' ),
+				$this->getSiteNavigation()
+			);
+			?>
+
 			<div class="mw-body" role="main">
 				<?php
 				if ( $this->data['sitenotice'] ) {
@@ -76,40 +150,6 @@ class FedoraTemplate extends BaseTemplate {
 					$this->html( 'dataAfterContent' );
 					?>
 				</div>
-			</div>
-
-			<div id="mw-navigation">
-				<?php
-				echo Html::rawElement(
-					'h2',
-					[],
-					$this->getMsg( 'navigation-heading' )->parse()
-				);
-
-				echo $this->getLogo();
-				echo $this->getSearch();
-
-				// User profile links
-				echo Html::rawElement(
-					'div',
-					array( 'id' => 'user-tools' ),
-					$this->getUserLinks()
-				);
-
-				// Page editing and tools
-				echo Html::rawElement(
-					'div',
-					array( 'id' => 'page-tools' ),
-					$this->getPageLinks()
-				);
-
-				// Site navigation/sidebar
-				echo Html::rawElement(
-					'div',
-					array( 'id' => 'site-navigation' ),
-					$this->getSiteNavigation()
-				);
-				?>
 			</div>
 
 			<div id="mw-footer">
@@ -201,41 +241,6 @@ class FedoraTemplate extends BaseTemplate {
 		return $html;
 	}
 
-	/**
-	 * Generates the logo and (optionally) site title
-	 * @return string html
-	 */
-	private function getLogo( $id = 'p-logo', $imageOnly = false ) {
-		$html = Html::openElement(
-			'div',
-			array(
-				'id' => $id,
-				'class' => 'mw-portlet',
-				'role' => 'banner'
-			)
-		);
-		$html .= Html::element(
-			'a',
-			array(
-				'href' => $this->data['nav_urls']['mainpage']['href'],
-				'class' => 'mw-wiki-logo',
-			) + Linker::tooltipAndAccesskeyAttribs( 'p-logo' )
-		);
-		if ( !$imageOnly ) {
-			$html .= Html::element(
-				'a',
-				array(
-					'id' => 'p-banner',
-					'class' => 'mw-wiki-title',
-					'href'=> $this->data['nav_urls']['mainpage']['href']
-				) + Linker::tooltipAndAccesskeyAttribs( 'p-logo' ),
-				$this->getMsg( 'sitetitle' )->escaped()
-			);
-		}
-		$html .= Html::closeElement( 'div' );
-
-		return $html;
-	}
 
 	/**
 	 * Generates the search form

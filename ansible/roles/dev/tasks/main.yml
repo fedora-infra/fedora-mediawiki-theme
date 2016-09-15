@@ -37,3 +37,23 @@
     dest: /var/www/wiki/LocalSettings.php
     regexp: "vector"
     replace: "fedora"
+
+- name: copy logo
+  shell: cp /usr/share/mediawiki/skins/Fedora/resources/images/fedorawiki_logo.png /usr/share/mediawiki/resources/assets/fedorawiki_logo.png
+  args:
+      creates: /usr/share/mediawiki/resources/assets/fedorawiki_logo.png
+
+- replace:
+    dest: /var/www/wiki/LocalSettings.php
+    regexp: "wiki.png"
+    replace: "fedorawiki_logo.png"
+
+- lineinfile:
+    dest: /var/www/wiki/LocalSettings.php
+    line: "error_reporting( -1 );"
+    state: present
+
+- lineinfile:
+    dest: /var/www/wiki/LocalSettings.php
+    line: "ini_set( 'display_errors', 1 );"
+    state: present
