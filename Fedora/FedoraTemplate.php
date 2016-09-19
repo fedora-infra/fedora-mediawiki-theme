@@ -14,7 +14,7 @@ class FedoraTemplate extends BaseTemplate {
 		<?php
 		echo Html::openElement(
 			'div',
-			array( 'class' => 'navbar navbar-full masthead' )
+			array( 'class' => 'navbar navbar-full navbar-light masthead' )
 		);
 
 		echo Html::openElement(
@@ -35,6 +35,34 @@ class FedoraTemplate extends BaseTemplate {
 			'ul',
 			array( 'class' => 'nav navbar-nav pull-xs-right' )
 		);
+
+		foreach ( $this->getSidebar() as $boxName => $box ) {
+			if ( $boxName != 'TOOLBOX' ) {
+				echo Html::openElement(
+					'li',
+					array( 'class' => 'nav-item dropdown' )
+				);
+
+				echo Html::openElement(
+					'a',
+					array( 'class' => 'nav-link dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#', 'role' => 'button' )
+				);
+				echo isset( $box['headerMessage'] ) ? $this->getMsg( $box['headerMessage'] )->text() : $box['header'];
+				echo Html::closeElement( 'a' );
+				if ( is_array( $box['content'] ) ) {
+					echo Html::openElement(
+					'ul',
+					array( 'class' => 'dropdown-menu dropdown-menu-right')
+					);
+
+					foreach ( $box['content'] as $key => $item ) {
+						echo $this->makeListItem( $key, $item,  array('link-class'=>'dropdown-item'));
+					}
+				}
+				echo Html::closeElement( 'ul' );
+				echo Html::closeElement( 'li' );
+			}
+		}
 
 		echo Html::openElement(
 			'li',
@@ -69,24 +97,57 @@ class FedoraTemplate extends BaseTemplate {
 		?>
 
 
-		<div class="bodycontent container-fluid p-t-2">
-			<?php
+		<div class="bodycontent">
+			<div class="sub-header p-t-1">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-6">
+						<?php
+						echo Html::rawElement(
+							'h1',
+							array(
+								'lang' => $this->get( 'pageLanguage' )
+							),
+							$this->get( 'title' )
+						);
+						?>
+					</div>
+					<div class="col-sm-6">
+						<div class="btn-group pull-xs-right">
+						<?php
+						foreach ( $this->data['content_navigation']['actions'] as $key => $item ) {
+							echo $this->makeLink( $key, $item , array('link-class'=> 'btn btn-sm btn-secondary'));
+						}
+						 ?>
+					 </div>
+				</div>
+			</div>
 
-			// Page editing and tools
-			echo Html::rawElement(
-				'div',
-				array( 'id' => 'page-tools' ),
-				$this->getPageLinks()
-			);
-			// Site navigation/sidebar
-			echo Html::rawElement(
-				'div',
-				array( 'id' => 'site-navigation' ),
-				$this->getSiteNavigation()
-			);
-			?>
+				<ul class="nav nav-tabs nav-small m-l-0">
+				<?php
+				foreach ( $this->data['content_navigation']['namespaces'] as $key => $item ) {
+					$class = "";
+					if (strpos($item['class'],'selected')!== false){
+						$class = "active";
+					}
+					echo $this->makeListItem( $key, $item , array('tag'=> 'li class="nav-item"', 'link-class'=>"nav-link $class"));
+				}
 
-			<div class="mw-body" role="main">
+
+				foreach ( $this->data['content_navigation']['views'] as $key => $item ) {
+					$class = "";
+					if (strpos($item['class'],'selected')!== false){
+						$class = "active";
+					}
+					echo $this->makeListItem( $key, $item , array('tag'=> 'li class="nav-item pull-xs-right"', 'link-class'=>"nav-link $class"));
+				}
+				?>
+
+			</ul>
+				</div>
+			</div>
+
+			<div class="mw-body container-fluid" role="main">
 				<?php
 				if ( $this->data['sitenotice'] ) {
 					echo Html::rawElement(
@@ -103,14 +164,7 @@ class FedoraTemplate extends BaseTemplate {
 					);
 				}
 				echo $this->getIndicators();
-				echo Html::rawElement(
-					'h1',
-					array(
-						'class' => 'firstHeading',
-						'lang' => $this->get( 'pageLanguage' )
-					),
-					$this->get( 'title' )
-				);
+
 
 				echo Html::rawElement(
 					'div',
