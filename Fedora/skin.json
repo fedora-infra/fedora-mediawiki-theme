@@ -1,11 +1,11 @@
 {
 	"name": "Fedora",
-	"version": "1.0",
-	"author": "...",
+	"version": "0.01",
+	"author": "Ryan Lerch <rlerch@redhat.com>",
 	"url": "https://pagure.io/fedora-mediawikitheme",
 	"descriptionmsg": "fedora-desc",
 	"namemsg": "skinname-fedora",
-	"license-name": "CC0-1.0",
+	"license-name": "GPLv2+",
 	"type": "skin",
 	"ValidSkinNames": {
 		"fedora": "Fedora"
