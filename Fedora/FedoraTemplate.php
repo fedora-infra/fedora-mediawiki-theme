@@ -221,28 +221,14 @@ class FedoraTemplate extends BaseTemplate {
 				</div>
 			</div>
 
-			<div id="mw-footer">
+			<div id="mw-footer" class="footer text-muted m-t-3 p-y-2">
+				<p class="copy">
+				Copyright &copy; <?php echo date('Y');?> Red Hat, Inc. and others.  All Rights Reserved.  For comments or queries, please <a href="/wiki/Communicating_and_getting_help">contact us</a>.
+				</p>
+				<p class="disclaimer">
+				The Fedora Project is maintained and driven by the community and sponsored by Red Hat.  This is a community maintained site.  Red Hat is not responsible for content.
+				</p>
 				<?php
-				echo Html::openElement(
-					'ul',
-					array(
-						'id' => 'footer-icons',
-						'role' => 'contentinfo'
-					)
-				);
-				foreach ( $this->getFooterIcons( 'icononly' ) as $blockName => $footerIcons ) {
-					echo Html::openElement(
-						'li',
-						array(
-							'id' => 'footer-' . Sanitizer::escapeId( $blockName ) . 'ico'
-						)
-					);
-					foreach ( $footerIcons as $icon ) {
-						echo $this->getSkin()->makeFooterIcon( $icon );
-					}
-					echo Html::closeElement( 'li' );
-				}
-				echo Html::closeElement( 'ul' );
 
 				foreach ( $this->getFooterLinks() as $category => $links ) {
 					echo Html::openElement(
@@ -261,10 +247,18 @@ class FedoraTemplate extends BaseTemplate {
 							$this->get( $key )
 						);
 					}
+					if ($category == 'places'){
+
+						echo "<li><a href='http://fedoraproject.org/en/sponsors'>Sponsors</a></li>";
+						echo "<li><a href='http://fedoraproject.org/wiki/Legal:Main'>Legal</a></li>";
+						echo "<li><a href='http://fedoraproject.org/wiki/Legal:Trademark_guidelines'>Trademark Guidelines</a></li>";
+
+					}
 					echo Html::closeElement( 'ul' );
 				}
 				$this->clear();
 				?>
+
 			</div>
 		</div>
 
