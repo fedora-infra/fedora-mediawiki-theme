@@ -63,31 +63,42 @@ class FedoraTemplate extends BaseTemplate {
 				echo Html::closeElement( 'li' );
 			}
 		}
+		$personaltools = $this->getPersonalTools();
 
-		echo Html::openElement(
-			'li',
-			array( 'class' => 'nav-item dropdown' )
-		);
+		if ( $personaltools['openidlogin'] ) {
+			echo Html::rawElement(
+				'a',
+				array(
+					'href' => $personaltools['openidlogin']['links'][0]['href'],
+					'class' => 'btn btn-secondary',
+				),
+				"Log In"
+			);
+		} else{
+			echo Html::openElement(
+				'li',
+				array( 'class' => 'nav-item dropdown' )
+			);
 
-		echo Html::openElement(
-			'a',
-			array( 'class' => 'nav-link dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#', 'role' => 'button' )
-		);
-		echo Html::rawElement(
-			'img',
-			array(
-				'src' => 'https://seccdn.libravatar.org/avatar/de5bf8d06663adb3bb1b8d49ccab259828fad7dddeb233b073d0c447d79b4c14?s=24&d=retro',
-			)
-		);
-		echo Html::closeElement( 'a' );
-		echo '<ul class="dropdown-menu dropdown-menu-right">';
-		foreach ( $this->getPersonalTools() as $key => $item ) {
-			echo $this->makeListItem( $key, $item , array('link-class'=>'dropdown-item'));
+			echo Html::openElement(
+				'a',
+				array( 'class' => 'nav-link dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#', 'role' => 'button' )
+			);
+			echo Html::rawElement(
+				'img',
+				array(
+					'src' => 'https://seccdn.libravatar.org/avatar/de5bf8d06663adb3bb1b8d49ccab259828fad7dddeb233b073d0c447d79b4c14?s=24&d=retro',
+				)
+			);
+			echo Html::closeElement( 'a' );
+			echo '<ul class="dropdown-menu dropdown-menu-right">';
+			foreach ( $personaltools as $key => $item ) {
+				echo $this->makeListItem( $key, $item , array('link-class'=>'dropdown-item'));
+			}
+	    echo '</ul>';
+
+			echo Html::closeElement( 'li' );
 		}
-    echo '</ul>';
-
-		echo Html::closeElement( 'li' );
-
 		echo Html::closeElement( 'ul' );
 
 
