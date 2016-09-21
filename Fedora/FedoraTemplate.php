@@ -21,6 +21,10 @@ class FedoraTemplate extends BaseTemplate {
 			'div',
 			array( 'class' => 'container-fluid' )
 		);
+		echo Html::openElement(
+			'a',
+			array( 'href' => $this->data['nav_urls']['mainpage']['href'] )
+		);
 
 		echo Html::rawElement(
 			'img',
@@ -30,7 +34,7 @@ class FedoraTemplate extends BaseTemplate {
 				'height' => '40px',
 			)
 		);
-
+		echo Html::closeElement( 'a' );
 		echo Html::openElement(
 			'ul',
 			array( 'class' => 'nav navbar-nav pull-xs-right' )
