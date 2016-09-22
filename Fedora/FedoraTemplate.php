@@ -221,7 +221,7 @@ class FedoraTemplate extends BaseTemplate {
 				</div>
 			</div>
 
-			<div id="mw-footer" class="footer text-muted m-t-3 p-y-2">
+			<div id="mw-footer" class="footer text-muted text-xs-center m-t-3 p-y-3">
 				<p class="copy">
 				Copyright &copy; <?php echo date('Y');?> Red Hat, Inc. and others.  All Rights Reserved.  For comments or queries, please <a href="/wiki/Communicating_and_getting_help">contact us</a>.
 				</p>
