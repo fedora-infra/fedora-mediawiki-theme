@@ -19,7 +19,7 @@ class FedoraTemplate extends BaseTemplate {
 
 		echo Html::openElement(
 			'div',
-			array( 'class' => 'container-fluid' )
+			array( 'class' => 'container' )
 		);
 		echo Html::openElement(
 			'a',
@@ -74,7 +74,7 @@ class FedoraTemplate extends BaseTemplate {
 				'a',
 				array(
 					'href' => $personaltools['openidlogin']['links'][0]['href'],
-					'class' => 'btn btn-secondary',
+					'class' => 'btn btn-primary m-l-2',
 				),
 				"Log In"
 			);
@@ -114,7 +114,7 @@ class FedoraTemplate extends BaseTemplate {
 
 		<div class="bodycontent">
 			<div class="sub-header p-t-1">
-				<div class="container-fluid">
+				<div class="container">
 					<div class="row">
 						<div class="col-sm-6">
 						<?php
@@ -162,7 +162,7 @@ class FedoraTemplate extends BaseTemplate {
 				</div>
 			</div>
 
-			<div class="mw-body container-fluid" role="main">
+			<div class="mw-body container" role="main">
 				<?php
 				if ( $this->data['sitenotice'] ) {
 					echo Html::rawElement(
