@@ -69,7 +69,7 @@ class FedoraTemplate extends BaseTemplate {
 		}
 		$personaltools = $this->getPersonalTools();
 
-		if ( $personaltools['openidlogin'] ) {
+		if ( isset($personaltools['openidlogin']) ) {
 			echo Html::rawElement(
 				'a',
 				array(
@@ -88,10 +88,11 @@ class FedoraTemplate extends BaseTemplate {
 				'a',
 				array( 'class' => 'nav-link dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#', 'role' => 'button' )
 			);
+			$avatarhash = md5(strtolower($this -> data["username"]."@fedoraproject.org"));
 			echo Html::rawElement(
 				'img',
 				array(
-					'src' => 'https://seccdn.libravatar.org/avatar/de5bf8d06663adb3bb1b8d49ccab259828fad7dddeb233b073d0c447d79b4c14?s=24&d=retro',
+					'src' => 'https://seccdn.libravatar.org/avatar/'.$avatarhash.'?s=24&d=retro',
 				)
 			);
 			echo Html::closeElement( 'a' );
