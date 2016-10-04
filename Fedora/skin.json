@@ -40,7 +40,8 @@
 		"skins.fedora.js": {
 			"position": "bottom",
 			"scripts": [
-				"resources/main.js"
+				"resources/main.js",
+				"resources/libraries/jquery-3.1.0.js"
 			]
 		}
 	},
