@@ -21,7 +21,6 @@ class SkinFedora extends SkinTemplate {
 		$out->addStyle('https://apps.fedoraproject.org/global/fedora-bootstrap-fonts/font-awesome.css');
 		$out->addStyle('https://apps.fedoraproject.org/global/fedora-bootstrap-fonts/hack.css');
 
-		$out->addScriptFile('https://apps.fedoraproject.org/global/fedora-bootstrap-1.0.1/fedora-bootstrap.js');
 		$out->addModuleStyles( array(
 			'mediawiki.skinning.interface',
 			'mediawiki.skinning.content.externallinks',
