@@ -29,7 +29,7 @@ class FedoraTemplate extends BaseTemplate {
 		echo Html::rawElement(
 			'img',
 			array(
-				'src' => $this->data[ 'logopath' ],
+				'src' => '/w/skins/Fedora/resources/images/fedorawiki_logo.png',
 				'alt' => $this->data[ 'sitename' ],
 				'height' => '40px',
 			)
