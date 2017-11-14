@@ -27,7 +27,6 @@ class SkinFedora extends SkinTemplate {
 			'skins.fedora'
 		) );
 		$out->addModules( array(
-			'jquery',
 			'skins.fedora.js',
 		) );
 	}

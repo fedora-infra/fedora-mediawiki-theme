@@ -39,9 +39,7 @@
 		},
 		"skins.fedora.js": {
 			"position": "bottom",
-			"dependencies": [
-				"jquery"
-            ],
+			"dependencies": [],
 			"scripts": [
 				"resources/main.js"
 			]
