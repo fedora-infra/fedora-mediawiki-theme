@@ -22,6 +22,14 @@ class FedoraTemplate extends BaseTemplate {
 			array( 'class' => 'container' )
 		);
 		echo Html::openElement(
+			'div',
+			array( 'class' => 'row' )
+		);
+		echo Html::openElement(
+			'div',
+			array( 'class' => 'col-md-4' )
+		);
+		echo Html::openElement(
 			'a',
 			array( 'href' => $this->data['nav_urls']['mainpage']['href'] )
 		);
@@ -35,11 +43,23 @@ class FedoraTemplate extends BaseTemplate {
 			)
 		);
 		echo Html::closeElement( 'a' );
+		echo Html::closeElement( 'div' );
+
+		echo Html::openElement(
+			'div',
+			array( 'class' => 'col-md-4' )
+		);
+		echo $this->getSearch();		
+		echo Html::closeElement( 'div' );
+
+		echo Html::openElement(
+			'div',
+			array( 'class' => 'col-md-4' )
+		);
 		echo Html::openElement(
 			'ul',
 			array( 'class' => 'nav navbar-nav pull-xs-right' )
 		);
-
 		foreach ( $this->getSidebar() as $boxName => $box ) {
 			if ( $boxName != 'TOOLBOX' ) {
 				echo Html::openElement(
@@ -105,10 +125,10 @@ class FedoraTemplate extends BaseTemplate {
 			echo Html::closeElement( 'li' );
 		}
 		echo Html::closeElement( 'ul' );
-
-
-		echo Html::closeElement( 'div' );
-		echo Html::closeElement( 'div' );
+		echo Html::closeElement( 'div' );				
+		echo Html::closeElement( 'div' ); //row		
+		echo Html::closeElement( 'div' ); //container
+		echo Html::closeElement( 'div' ); //navbar
 
 		?>
 
@@ -326,8 +346,28 @@ class FedoraTemplate extends BaseTemplate {
 			[],
 			Html::label( $this->getMsg( 'search' )->escaped(), 'searchInput' )
 		);
-		$html .= $this->makeSearchInput( array( 'id' => 'searchInput' ) );
-		$html .= $this->makeSearchButton( 'go', array( 'id' => 'searchGoButton', 'class' => 'searchButton' ) );
+		$html .= Html::openElement(
+			'div',
+			array( 'class' => 'input-group' )
+		);
+		$html .= $this->makeSearchInput( array( 'id' => 'searchInput' , 'class' => 'form-control') );
+		$html .= Html::openElement(
+			'span',
+			array( 'class' => 'input-group-btn' )
+		);
+		//<input name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchGoButton" class="btn btn-secondary" type="submit">
+		//$html .= $this->makeSearchButton( 'go', array( 'id' => 'searchGoButton', 'class' => 'btn btn-secondary' ) );
+		$html .= Html::OpenElement(
+			'button',
+			array( 'id' => 'searchGoButton', 'class' => 'btn btn-secondary', 'type' => 'submit' )
+		);
+		$html .= Html::rawelement(
+			'i',
+			array('class' => 'fa fa-search')
+		);
+		$html .= Html::closeElement( 'button' );		
+		$html .= Html::closeElement( 'span' );
+		$html .= Html::closeElement( 'div' );		
 		$html .= Html::closeElement( 'form' );
 
 		return $html;
