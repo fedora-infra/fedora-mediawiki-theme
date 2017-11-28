@@ -12,6 +12,7 @@
       - mediawiki
       - postgresql-devel
       - php-pgsql
+      - httpd
 
 - replace:
     dest: /etc/httpd/conf.d/mediawiki.conf
