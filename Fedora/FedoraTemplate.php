@@ -68,17 +68,17 @@ class FedoraTemplate extends BaseTemplate {
 			}
 		}
 		$personaltools = $this->getPersonalTools();
-
-		if ( isset($personaltools['openidlogin']) ) {
+		$loggedin = $this->getSkin()->getUser()->isLoggedIn();
+		if ( !$loggedin ) {
 			echo Html::rawElement(
 				'a',
 				array(
-					'href' => $personaltools['openidlogin']['links'][0]['href'],
+					'href' => $personaltools['login']['links'][0]['href'],
 					'class' => 'btn btn-primary m-l-2',
 				),
 				"Log In"
 			);
-		} else{
+		} else {
 			echo Html::openElement(
 				'li',
 				array( 'class' => 'nav-item dropdown' )
