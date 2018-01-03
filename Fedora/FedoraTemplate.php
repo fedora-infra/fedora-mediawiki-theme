@@ -154,6 +154,7 @@ class FedoraTemplate extends BaseTemplate {
 						foreach ( $this->data['content_navigation']['actions'] as $key => $item ) {
 							echo $this->makeLink( $key, $item , array('link-class'=> 'btn btn-sm btn-secondary'));
 						}
+						echo $this->getIndicators();						
 						 ?>
 					 </div>
 				</div>
@@ -199,8 +200,6 @@ class FedoraTemplate extends BaseTemplate {
 						$this->get( 'newtalk' )
 					);
 				}
-				echo $this->getIndicators();
-
 
 				echo Html::rawElement(
 					'div',
