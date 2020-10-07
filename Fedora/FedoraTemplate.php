@@ -154,8 +154,17 @@ class FedoraTemplate extends BaseTemplate {
 						foreach ( $this->data['content_navigation']['actions'] as $key => $item ) {
 							echo $this->makeLink( $key, $item , array('link-class'=> 'btn btn-sm btn-secondary'));
 						}
-						echo $this->getIndicators();						
-						 ?>
+                        echo $this->getIndicators();
+                        ?>
+                        </div>
+                    </div>
+                </div>
+		    	<div class="row">
+					<div class="col-sm-12">
+						<div class="pull-xs-right small text-muted">
+						<?php
+                        echo $this->data["lastmod"];
+  					    ?>
 					 </div>
 				</div>
 			</div>
