@@ -1,10 +1,10 @@
 ---
 - name: Install database packages
   dnf:
-      name: "{{ item }}"
       state: present
-  with_items:
+      name:
       - postgresql-server
+      - python3-psycopg2
 
 - name: Initialize PostgreSQL
   command: postgresql-setup initdb
@@ -26,12 +26,22 @@
     state: started
     enabled: yes
 
-- name: Create a user for postgres
-  shell: runuser -l postgres -c 'createuser -DSRP mediawikiuser' && touch /home/vagrant/.dbuser-created
-  args:
-      creates: /home/vagrant/.dbuser-created
-
-- name: Create a database for Pkgdb2
-  shell: runuser -l postgres -c 'createdb -O mediawikiuser mediawikidb' && touch /home/vagrant/.db-created
-  args:
-      creates: /home/vagrant/.db-created
+- name: Create the database user
+  postgresql_user:
+    name: "mediawikiuser"
+  become: yes
+  become_user: postgres
+- name: Create the database itself
+  postgresql_db:
+    name: "mediawikidb"
+    owner: "mediawikiuser"
+    encoding: UTF-8
+  become: yes
+  become_user: postgres
+- name: Test the database creation
+  postgresql_db:
+    name: "mediawikidb"
+    owner: "mediawikiuser"
+    encoding: UTF-8
+  become: yes
+  become_user: postgres

@@ -6,23 +6,20 @@
 
 - name: Install packages
   dnf:
-      name: "{{ item }}"
       state: present
-  with_items:
+      name:
       - mediawiki
       - postgresql-devel
       - php-pgsql
       - httpd
 
-- replace:
+- name: Install the mediawiki.conf apache config file
+  copy:
+    src: mediawiki.conf
     dest: /etc/httpd/conf.d/mediawiki.conf
-    regexp: "# Alias /wiki/skins /usr/share/mediawiki/skins"
-    replace: "Alias /wiki/skins /usr/share/mediawiki/skins"
-
-- replace:
-    dest: /etc/httpd/conf.d/mediawiki.conf
-    regexp: "# Alias /wiki /var/www/wiki"
-    replace: "Alias /wiki /var/www/wiki"
+    owner: root
+    group: root
+    mode: '0644'
 
 - service:
     name: httpd
