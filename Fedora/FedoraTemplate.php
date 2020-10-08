@@ -278,7 +278,7 @@ class FedoraTemplate extends BaseTemplate {
 					}
 					if ($category == 'places'){
 
-						echo "<li><a href='https://docs.fedoraproject.org/fedora-project/project/code-of-conduct.html'>Code of Conduct</a></li>";
+						echo "<li><a href='https://docs.fedoraproject.org/en-US/project/code-of-conduct/'>Code of Conduct</a></li>";
 						echo "<li><a href='http://fedoraproject.org/en/sponsors'>Sponsors</a></li>";
 						echo "<li><a href='http://fedoraproject.org/wiki/Legal:Main'>Legal</a></li>";
 						echo "<li><a href='http://fedoraproject.org/wiki/Legal:Trademark_guidelines'>Trademark Guidelines</a></li>";
