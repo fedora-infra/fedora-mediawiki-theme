@@ -263,7 +263,7 @@ class FedoraTemplate extends BaseTemplate {
 					echo Html::openElement(
 						'ul',
 						array(
-							'id' => 'footer-' . Sanitizer::escapeId( $category ),
+							'id' => 'footer-' . Sanitizer::escapeIdForAttribute( $category ),
 							'role' => 'contentinfo'
 						)
 					);
@@ -271,7 +271,7 @@ class FedoraTemplate extends BaseTemplate {
 						echo Html::rawElement(
 							'li',
 							array(
-								'id' => 'footer-' . Sanitizer::escapeId( $category . '-' . $key )
+								'id' => 'footer-' . Sanitizer::escapeIdForAttribute( $category . '-' . $key )
 							),
 							$this->get( $key )
 						);
@@ -313,7 +313,7 @@ class FedoraTemplate extends BaseTemplate {
 			array(
 				'role' => 'navigation',
 				'class' => 'mw-portlet',
-				'id' => Sanitizer::escapeId( $box['id'] )
+				'id' => Sanitizer::escapeIdForAttribute( $box['id'] )
 			) + Linker::tooltipAndAccesskeyAttribs( $box['id'] )
 		);
 		$html .= Html::element(
