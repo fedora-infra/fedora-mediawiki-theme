@@ -1,8 +1,8 @@
 {
 	"name": "Fedora",
-	"version": "0.05",
+	"version": "0.10",
 	"author": "Ryan Lerch <rlerch@redhat.com>",
-	"url": "https://pagure.io/fedora-mediawikitheme",
+	"url": "https://gitlab.com/fedora/websites-apps/themes/fedora-mediawiki-theme/",
 	"descriptionmsg": "fedora-desc",
 	"namemsg": "skinname-fedora",
 	"license-name": "GPLv2+",
