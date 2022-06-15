@@ -47,14 +47,14 @@ class FedoraTemplate extends BaseTemplate {
 
 		echo Html::openElement(
 			'div',
-			array( 'class' => 'col-md-4' )
+			array( 'class' => 'col-md-3' )
 		);
 		echo $this->getSearch();		
 		echo Html::closeElement( 'div' );
 
 		echo Html::openElement(
 			'div',
-			array( 'class' => 'col-md-4' )
+			array( 'class' => 'col-md-5' )
 		);
 		echo Html::openElement(
 			'ul',
