@@ -27,31 +27,21 @@
     enabled: yes
 
 - name: setup mediawiki
-  shell: php /usr/share/mediawiki/maintenance/install.php --dbuser mediawikiuser --confpath /var/www/wiki --dbname mediawikidb --dbport 5432 --dbserver 127.0.0.1 --dbtype postgres --lang en --pass "password" fedora admin
+  shell: php /usr/share/mediawiki/maintenance/install.php --server http://wiki.tinystage.test --scriptpath /w --dbuser mediawikiuser --confpath /usr/share/mediawiki --dbname mediawikidb --dbport 5432 --dbserver 127.0.0.1 --dbtype postgres --lang en --pass "@dminp@ssword" fedora admin
   args:
-      creates: /var/www/wiki/LocalSettings.php
+      creates: /usr/share/mediawiki/LocalSettings.php
 
 - replace:
-    dest: /var/www/wiki/LocalSettings.php
+    dest: /usr/share/mediawiki/LocalSettings.php
     regexp: "vector"
     replace: "fedora"
 
-- name: copy logo
-  shell: cp /usr/share/mediawiki/skins/Fedora/resources/images/fedorawiki_logo.png /usr/share/mediawiki/resources/assets/fedorawiki_logo.png
-  args:
-      creates: /usr/share/mediawiki/resources/assets/fedorawiki_logo.png
-
-- replace:
-    dest: /var/www/wiki/LocalSettings.php
-    regexp: "wiki.png"
-    replace: "fedorawiki_logo.png"
-
 - lineinfile:
-    dest: /var/www/wiki/LocalSettings.php
-    line: "error_reporting( -1 );"
+    dest: /usr/share/mediawiki/LocalSettings.php
+    line: "# error_reporting( -1 );"
     state: present
 
 - lineinfile:
-    dest: /var/www/wiki/LocalSettings.php
-    line: "ini_set( 'display_errors', 1 );"
+    dest: /usr/share/mediawiki/LocalSettings.php
+    line: "# ini_set( 'display_errors', 1 );"
     state: present

@@ -2,9 +2,15 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.network "forwarded_port", guest: 80, host: 8080
- config.vm.box = "fedora/32-cloud-base"
+ config.vm.network "forwarded_port", guest: 80, host: 8080
+ config.vm.box = "fedora/36-cloud-base"
  config.vm.synced_folder "Fedora", "/usr/share/mediawiki/skins/Fedora", type: "sshfs"
+
+ # This is a plugin that updates the host's /etc/hosts
+ # file with the hostname of the guest VM. In Fedora it is packaged as
+ # ``vagrant-hostmanager``
+ config.hostmanager.enabled = true
+ config.hostmanager.manage_host = true
 
  # Ansible needs the guest to have these
  config.vm.provision "shell", inline: "sudo dnf install -y python3-libselinux python3-libsemanage"
@@ -15,7 +21,7 @@ Vagrant.configure(2) do |config|
 
  # Create the "wiki" box
  config.vm.define "wiki" do |pagure|
-    pagure.vm.host_name = "wiki-dev.example.com"
+    pagure.vm.host_name = "wiki.tinystage.test"
 
     pagure.vm.provider :libvirt do |domain|
         # Season to taste

@@ -5,6 +5,7 @@
       name:
       - postgresql-server
       - python3-psycopg2
+      - acl
 
 - name: Initialize PostgreSQL
   command: postgresql-setup initdb
@@ -26,11 +27,15 @@
     state: started
     enabled: yes
 
-- name: Create the database user
-  postgresql_user:
-    name: "mediawikiuser"
+- block:
+    - name: Create the database user
+      postgresql_user:
+        name: "mediawikiuser"
+
   become: yes
   become_user: postgres
+  become_method: sudo
+
 - name: Create the database itself
   postgresql_db:
     name: "mediawikidb"
@@ -38,6 +43,8 @@
     encoding: UTF-8
   become: yes
   become_user: postgres
+  become_method: sudo
+
 - name: Test the database creation
   postgresql_db:
     name: "mediawikidb"
@@ -45,3 +52,4 @@
     encoding: UTF-8
   become: yes
   become_user: postgres
+  become_method: sudo
