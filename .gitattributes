@@ -3,3 +3,4 @@
 .gitattributes export-ignore
 Vagrantfile export-ignore
 README.md export-ignore
+mediawiki-skin-fedora.spec export-ignore
