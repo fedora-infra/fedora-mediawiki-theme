@@ -1,6 +1,6 @@
 
 Name:           mediawiki-skin-fedora
-Version:        0.10
+Version:        0.11
 Release:        1%{?dist}
 Summary:        Fedora mediawiki skin
 
@@ -32,6 +32,10 @@ cp -a %{_builddir}/fedora-mediawiki-theme-v%{version}/Fedora/ %{buildroot}%{_dat
 %{_datadir}/mediawiki/skins/Fedora
 
 %changelog
+* Wed Jun 15 2022 Ryan Lerch <rlerch@redhat.com> - 0.11-1
+- Tweak the spacing of the top bar to try to stop the login button wrapping
+- Update to the new Fedora Logo
+
 * Thu Jun 09 2022 Ryan Lerch <rlerch@redhat.com> - 0.10-1
 - Update to v0.10
 - At some point the Sanitizer module in mediawiki core removed the 
