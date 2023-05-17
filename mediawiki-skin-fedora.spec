@@ -1,6 +1,6 @@
 
 Name:           mediawiki-skin-fedora
-Version:        0.11
+Version:        0.12
 Release:        1%{?dist}
 Summary:        Fedora mediawiki skin
 
@@ -32,6 +32,17 @@ cp -a %{_builddir}/fedora-mediawiki-theme-v%{version}/Fedora/ %{buildroot}%{_dat
 %{_datadir}/mediawiki/skins/Fedora
 
 %changelog
+* Wed May 17 2023 Ryan Lerch <rlerch@redhat.com> - 0.12-1
+- Update to version v0.12 which fixes one issue:
+- in Mediawiki 1.36, the User->isLoggedIn() method was deprecated in
+  favour of the method it wrapped: User->isRegistered(). isLoggedIn was
+  subsequently removed in Mediawiki 1.38. In the Fedora mediawiki theme,
+  we used isLoggedIn() in the main template to show or hide the login
+  button and other elements for the logged in user. Consequently, the Fedora
+  mediawiki theme was no longer working when trying to use on mediawiki later
+  than 1.38. In this update, we now use the User->isRegistered() method
+  which resolves this issue.
+
 * Wed Jun 15 2022 Ryan Lerch <rlerch@redhat.com> - 0.11-1
 - Tweak the spacing of the top bar to try to stop the login button wrapping
 - Update to the new Fedora Logo
