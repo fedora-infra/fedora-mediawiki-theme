@@ -88,7 +88,7 @@ class FedoraTemplate extends BaseTemplate {
 			}
 		}
 		$personaltools = $this->getPersonalTools();
-		$loggedin = $this->getSkin()->getUser()->isLoggedIn();
+		$loggedin = $this->getSkin()->getUser()->isRegistered();
 		if ( !$loggedin ) {
 			echo Html::rawElement(
 				'a',
