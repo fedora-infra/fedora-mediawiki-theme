@@ -19,6 +19,9 @@
 		"skins.fedora": {
 			"class": "ResourceLoaderSkinModule",
 			"position": "top",
+			"features": {
+				"content-tables": true
+			},
 			"styles": {
 				"resources/libraries/normalise.css": {
 					"media": "screen"
