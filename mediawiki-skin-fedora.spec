@@ -1,6 +1,6 @@
 
 Name:           mediawiki-skin-fedora
-Version:        0.12
+Version:        0.13
 Release:        1%{?dist}
 Summary:        Fedora mediawiki skin
 
@@ -32,6 +32,14 @@ cp -a %{_builddir}/fedora-mediawiki-theme-v%{version}/Fedora/ %{buildroot}%{_dat
 %{_datadir}/mediawiki/skins/Fedora
 
 %changelog
+* Thu May 18 2023 Ryan Lerch <rlerch@redhat.com> - 0.13-1
+- Update to version v0.13 which fixes one issue:
+- Turn on wikitables styling feature
+  The mediawiki skinning interface removed the wikitables styling from
+  being imported by default in 1.38. It can, however be re-enabled with a
+  skin feature switch ('content-tables') which we do in this commit. See
+  https://www.mediawiki.org/wiki/Manual:ResourceLoaderSkinModule
+
 * Wed May 17 2023 Ryan Lerch <rlerch@redhat.com> - 0.12-1
 - Update to version v0.12 which fixes one issue:
 - in Mediawiki 1.36, the User->isLoggedIn() method was deprecated in
