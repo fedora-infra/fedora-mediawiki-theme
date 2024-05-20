@@ -292,7 +292,6 @@ class FedoraTemplate extends BaseTemplate {
 			</div>
 		</div>
 
-		<?php $this->printTrail() ?>
 		</body>
 		</html>
 
