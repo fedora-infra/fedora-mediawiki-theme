@@ -32,6 +32,9 @@ cp -a %{_builddir}/fedora-mediawiki-theme-v%{version}/Fedora/ %{buildroot}%{_dat
 %{_datadir}/mediawiki/skins/Fedora
 
 %changelog
+* Fri May 17 2024 Ryan Lerch <rlerch@redhat.com> - 0.14-1
+- Remove use of deprecated printTrail() method
+
 * Thu May 18 2023 Ryan Lerch <rlerch@redhat.com> - 0.13-1
 - Update to version v0.13 which fixes one issue:
 - Turn on wikitables styling feature
