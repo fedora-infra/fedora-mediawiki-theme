@@ -16,10 +16,10 @@ class SkinFedora extends SkinTemplate {
 	public function initPage( OutputPage $out ) {
 
 		$out->addMeta( 'viewport', 'width=device-width, initial-scale=1.0' );
-		$out->addStyle('https://apps.fedoraproject.org/global/fedora-bootstrap-1.0.1/fedora-bootstrap.css');
+		/*$out->addStyle('https://apps.fedoraproject.org/global/fedora-bootstrap-1.0.1/fedora-bootstrap.css');
 		$out->addStyle('https://apps.fedoraproject.org/global/fedora-bootstrap-fonts/open-sans.css');
 		$out->addStyle('https://apps.fedoraproject.org/global/fedora-bootstrap-fonts/font-awesome.css');
-		$out->addStyle('https://apps.fedoraproject.org/global/fedora-bootstrap-fonts/hack.css');
+		$out->addStyle('https://apps.fedoraproject.org/global/fedora-bootstrap-fonts/hack.css');*/
 
 		$out->addModuleStyles( array(
 			'mediawiki.skinning.interface',

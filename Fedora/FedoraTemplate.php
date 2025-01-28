@@ -14,24 +14,27 @@ class FedoraTemplate extends BaseTemplate {
 		<?php
 		echo Html::openElement(
 			'div',
-			array( 'class' => 'navbar navbar-full navbar-light masthead' )
+			array( 'class' => 'navbar navbar-expand-lg navbar-light masthead py-2 justify-content-between' )
 		);
 
-		echo Html::openElement(
-			'div',
-			array( 'class' => 'container' )
-		);
-		echo Html::openElement(
-			'div',
-			array( 'class' => 'row' )
-		);
-		echo Html::openElement(
-			'div',
-			array( 'class' => 'col-md-4' )
-		);
+		//echo Html::openElement(
+		//	'div',
+		//	array( 'class' => 'container' )
+		//);
+		//echo Html::openElement(
+		//	'div',
+		//	array( 'class' => 'row' )
+		//);
+		//echo Html::openElement(
+		//	'div',
+		//	array( 'class' => 'col-md-4' )
+		//);
 		echo Html::openElement(
 			'a',
-			array( 'href' => $this->data['nav_urls']['mainpage']['href'] )
+			array(
+				'href' => $this->data['nav_urls']['mainpage']['href'],
+				'class' => 'navbar-brand'
+			)
 		);
 
 		echo Html::rawElement(
@@ -43,22 +46,22 @@ class FedoraTemplate extends BaseTemplate {
 			)
 		);
 		echo Html::closeElement( 'a' );
-		echo Html::closeElement( 'div' );
+		//echo Html::closeElement( 'div' );
 
 		echo Html::openElement(
 			'div',
-			array( 'class' => 'col-md-3' )
+			array( 'class' => 'navbar-nav' )
 		);
 		echo $this->getSearch();		
 		echo Html::closeElement( 'div' );
 
-		echo Html::openElement(
-			'div',
-			array( 'class' => 'col-md-5' )
-		);
+		//echo Html::openElement(
+		//	'div',
+		//	array( 'class' => 'col-md-5' )
+		//);
 		echo Html::openElement(
 			'ul',
-			array( 'class' => 'nav navbar-nav pull-xs-right' )
+			array( 'class' => 'navbar-nav align-items-center' )
 		);
 		foreach ( $this->getSidebar() as $boxName => $box ) {
 			if ( $boxName != 'TOOLBOX' ) {
@@ -69,14 +72,14 @@ class FedoraTemplate extends BaseTemplate {
 
 				echo Html::openElement(
 					'a',
-					array( 'class' => 'nav-link dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#', 'role' => 'button' )
+					array( 'class' => 'nav-link dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#', 'role' => 'button', 'data-bs-toggle' => 'dropdown')
 				);
 				echo isset( $box['headerMessage'] ) ? $this->getMsg( $box['headerMessage'] )->text() : $box['header'];
 				echo Html::closeElement( 'a' );
 				if ( is_array( $box['content'] ) ) {
 					echo Html::openElement(
 					'ul',
-					array( 'class' => 'dropdown-menu dropdown-menu-right')
+					array( 'class' => 'dropdown-menu dropdown-menu-end')
 					);
 
 					foreach ( $box['content'] as $key => $item ) {
@@ -106,7 +109,7 @@ class FedoraTemplate extends BaseTemplate {
 
 			echo Html::openElement(
 				'a',
-				array( 'class' => 'nav-link dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#', 'role' => 'button' )
+				array( 'class' => 'nav-link dropdown-toggle', 'data-toggle' => 'dropdown', 'href' => '#', 'role' => 'button', 'data-bs-toggle' => 'dropdown' )
 			);
 			$avatarhash = md5(strtolower($this -> data["username"]."@fedoraproject.org"));
 			echo Html::rawElement(
@@ -116,7 +119,7 @@ class FedoraTemplate extends BaseTemplate {
 				)
 			);
 			echo Html::closeElement( 'a' );
-			echo '<ul class="dropdown-menu dropdown-menu-right">';
+			echo '<ul class="dropdown-menu dropdown-menu-end">';
 			foreach ( $personaltools as $key => $item ) {
 				echo $this->makeListItem( $key, $item , array('link-class'=>'dropdown-item'));
 			}
@@ -125,75 +128,70 @@ class FedoraTemplate extends BaseTemplate {
 			echo Html::closeElement( 'li' );
 		}
 		echo Html::closeElement( 'ul' );
-		echo Html::closeElement( 'div' );				
-		echo Html::closeElement( 'div' ); //row		
-		echo Html::closeElement( 'div' ); //container
+		//echo Html::closeElement( 'div' );				
+		//echo Html::closeElement( 'div' ); //row		
+		// echo Html::closeElement( 'div' ); //container
 		echo Html::closeElement( 'div' ); //navbar
 
 		?>
 
 
 		<div class="bodycontent">
-			<div class="sub-header p-t-1">
+			<div class="sub-header pt-4">
 				<div class="container">
-					<div class="row">
-						<div class="col-sm-6">
-						<?php
-						echo Html::rawElement(
-							'h1',
-							array(
-								'lang' => $this->get( 'pageLanguage' )
-							),
-							$this->get( 'title' )
-						);
-						?>
+					<div class="d-flex justify-content-between align-items-center">
+						<div>
+							<?php
+							echo Html::rawElement(
+								'h1',
+								array(
+									'lang' => $this->get( 'pageLanguage' )
+								),
+								$this->get( 'title' )
+							);
+							?>
+						</div>
+						<div>
+							<div class="btn-group">
+							<?php
+							foreach ( $this->data['content_navigation']['actions'] as $key => $item ) {
+								echo $this->makeLink( $key, $item , array('link-class'=> 'btn btn-sm btn-outline-primary'));
+							}
+							echo $this->getIndicators();
+							?>
+							</div>
+						</div>
 					</div>
-					<div class="col-sm-6">
-						<div class="btn-group pull-xs-right">
+					<div class="d-flex justify-content-between">
+						<ul class="nav nav-tabs nav-small border-0 ms-0">
 						<?php
-						foreach ( $this->data['content_navigation']['actions'] as $key => $item ) {
-							echo $this->makeLink( $key, $item , array('link-class'=> 'btn btn-sm btn-secondary'));
+						foreach ( $this->data['content_navigation']['namespaces'] as $key => $item ) {
+							$class = "";
+							if (strpos($item['class'],'selected')!== false){
+								$class = "active";
+							}
+							echo $this->makeListItem( $key, $item , array('tag'=> 'li class="nav-item"', 'link-class'=>"nav-link $class"));
 						}
-                        echo $this->getIndicators();
-                        ?>
-                        </div>
-                    </div>
-                </div>
-		    	<div class="row">
-					<div class="col-sm-12">
-						<div class="pull-xs-right small text-muted">
+						?>
+						</ul>
+						<ul class="nav nav-tabs nav-small border-0 ms-0">
 						<?php
-                        echo $this->data["lastmod"];
-  					    ?>
-					 </div>
+						foreach ( $this->data['content_navigation']['views'] as $key => $item ) {
+							$class = "";
+							if (strpos($item['class'],'selected')!== false){
+								$class = "active";
+							}
+							echo $this->makeListItem( $key, $item , array('tag'=> 'li class="nav-item pull-xs-right"', 'link-class'=>"nav-link $class"));
+						}
+						?>
+
+						</ul>
+					</div>
 				</div>
 			</div>
+		</div>
 
-				<ul class="nav nav-tabs nav-small m-l-0">
-				<?php
-				foreach ( $this->data['content_navigation']['namespaces'] as $key => $item ) {
-					$class = "";
-					if (strpos($item['class'],'selected')!== false){
-						$class = "active";
-					}
-					echo $this->makeListItem( $key, $item , array('tag'=> 'li class="nav-item"', 'link-class'=>"nav-link $class"));
-				}
-
-
-				foreach ( $this->data['content_navigation']['views'] as $key => $item ) {
-					$class = "";
-					if (strpos($item['class'],'selected')!== false){
-						$class = "active";
-					}
-					echo $this->makeListItem( $key, $item , array('tag'=> 'li class="nav-item pull-xs-right"', 'link-class'=>"nav-link $class"));
-				}
-				?>
-
-			</ul>
-				</div>
-			</div>
-
-			<div class="mw-body container" role="main">
+			<div class="mw-body container pb-5" role="main">
 				<?php
 				if ( $this->data['sitenotice'] ) {
 					echo Html::rawElement(
@@ -250,47 +248,68 @@ class FedoraTemplate extends BaseTemplate {
 				</div>
 			</div>
 
-			<div id="mw-footer" class="footer text-muted text-xs-center m-t-3 p-y-3">
-				<p class="copy">
-				Copyright &copy; <?php echo date('Y');?> Red Hat, Inc. and others.  All Rights Reserved.  For comments or queries, please <a href="/wiki/Communicating_and_getting_help">contact us</a>.
-				</p>
-				<p class="disclaimer">
-				The Fedora Project is maintained and driven by the community and sponsored by Red Hat.  This is a community maintained site.  Red Hat is not responsible for content.
-				</p>
-				<?php
-
-				foreach ( $this->getFooterLinks() as $category => $links ) {
-					echo Html::openElement(
-						'ul',
-						array(
-							'id' => 'footer-' . Sanitizer::escapeIdForAttribute( $category ),
-							'role' => 'contentinfo'
-						)
-					);
-					foreach ( $links as $key ) {
-						echo Html::rawElement(
-							'li',
-							array(
-								'id' => 'footer-' . Sanitizer::escapeIdForAttribute( $category . '-' . $key )
-							),
-							$this->get( $key )
-						);
-					}
-					if ($category == 'places'){
-
-						echo "<li><a href='https://docs.fedoraproject.org/en-US/project/code-of-conduct/'>Code of Conduct</a></li>";
-						echo "<li><a href='http://fedoraproject.org/en/sponsors'>Sponsors</a></li>";
-						echo "<li><a href='http://fedoraproject.org/wiki/Legal:Main'>Legal</a></li>";
-						echo "<li><a href='http://fedoraproject.org/wiki/Legal:Trademark_guidelines'>Trademark Guidelines</a></li>";
-
-					}
-					echo Html::closeElement( 'ul' );
-				}
-				$this->clear();
-				?>
-
+			<div class="footer py-5 text-white">
+				<div class="container">
+					<div class="row footerlinks justify-content-center">
+						<div class="col-sm-3 col-4 mt-3">
+							<div>
+								<dl>
+									<dt class="text-uppercase h4"><strong>About</strong></dt>
+									<dd><a href="https://getfedora.org/">Get Fedora Linux</a></dd>
+									<dd><a href="https://getfedora.org/en/sponsors/">Sponsors</a></dd>
+									<dd><a href="https://fedoramagazine.org">Fedora Magazine</a></dd>
+									<dd><a href="https://fedoraproject.org/wiki/Legal:Main#Legal">Legal</a></dd>
+								</dl>
+							</div>
+					</div>
+					<div class="col-sm-3 col-4 mt-3">
+							<div>
+								<dl>
+									<dt class="text-uppercase h4"><strong>Support</strong></dt>
+									<dd><a href="https://fedoraproject.org/wiki/Communicating_and_getting_help">Get Help</a></dd>
+									<dd><a href="https://ask.fedoraproject.org/">Ask Fedora</a></dd>
+									<dd><a href="https://discussion.fedoraproject.org/c/ask/common-issues/">Common Issues</a></dd>
+									<dd><a href="https://developer.fedoraproject.org/">Fedora Developer Portal</a></dd>
+								</dl>
+							</div>
+					</div>
+					<div class="col-sm-3 col-4 mt-3">
+							<div>
+								<dl>
+									<dt class="text-uppercase h4"><strong>Community</strong></dt>
+									<dd><a href="https://fedoraproject.org/wiki/Join">Join Fedora</a></dd>
+									<dd><a href="https://fedoraproject.org/wiki/Overview">About Fedora</a></dd>
+									<dd><a href="http://fedoraplanet.org">Planet Fedora</a></dd>
+									<dd><a href="https://accounts.fedoraproject.org/">Fedora Accounts</a></dd>
+								</dl>
+							</div>
+					</div>
+					</div>
+					<div class="row footerlinks">
+						<div class="col-12 text-center">
+							<p class="disclaimer fw-bold">
+								This is a community maintained site.  Red Hat is not responsible for content.
+							</p>
+							<p>
+							&copy; <?php echo date('Y');?> Red Hat, Inc. and others.  Content is available under <a href-"https://creativecommons.org/licenses/by-sa/4.0/deed.en">Attribution-Share Alike 4.0 International</a> unless otherwise noted.
+							</p>
+							<p> Fedora is sponsored by Red Hat. <a href="https://www.redhat.com/en/technologies/linux-platforms/articles/relationship-between-fedora-and-rhel">Learn more about the relationship between Red Hat and Fedora »</a> </p>
+							<div class="py-3"> 
+								<?php 
+								echo Html::rawElement(
+									'img',
+									array(
+										'src' => '/w/skins/Fedora/resources/images/redhat.png',
+										'alt' => 'Red Hat Logo',
+										'height' => '40px',
+									)
+								);
+								?>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
 
 		</body>
 		</html>
@@ -367,7 +386,7 @@ class FedoraTemplate extends BaseTemplate {
 		//$html .= $this->makeSearchButton( 'go', array( 'id' => 'searchGoButton', 'class' => 'btn btn-secondary' ) );
 		$html .= Html::OpenElement(
 			'button',
-			array( 'id' => 'searchGoButton', 'class' => 'btn btn-secondary', 'type' => 'submit' )
+			array( 'id' => 'searchGoButton', 'class' => 'btn bg-white border rounded-0 rounded-end', 'type' => 'submit' )
 		);
 		$html .= Html::rawelement(
 			'i',

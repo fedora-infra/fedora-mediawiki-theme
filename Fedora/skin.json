@@ -26,6 +26,15 @@
 				"resources/libraries/normalise.css": {
 					"media": "screen"
 				},
+				"resources/fonts/font-awesome.css": {
+					"media": "screen"
+				},
+				"resources/fonts/open-sans.css": {
+					"media": "screen"
+				},
+				"resources/fedora-bootstrap/fedora-bootstrap.min.css": {
+					"media": "screen"
+				},
 				"resources/screen-common.less": {
 					"media": "screen"
 				},
@@ -44,7 +53,8 @@
 			"position": "bottom",
 			"dependencies": [],
 			"scripts": [
-				"resources/main.js"
+				"resources/main.js",
+				"resources/fedora-bootstrap/fedora-bootstrap.min.js"
 			]
 		}
 	},
