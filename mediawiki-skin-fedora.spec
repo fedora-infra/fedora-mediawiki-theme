@@ -1,13 +1,13 @@
 
 Name:           mediawiki-skin-fedora
-Version:        0.13
+Version:        0.15
 Release:        1%{?dist}
 Summary:        Fedora mediawiki skin
 
 Group:          Applications/Internet
 License:        GPLv2+
-URL:            https://gitlab.com/fedora/websites-apps/themes/fedora-mediawiki-theme/
-Source0:        https://gitlab.com/fedora/websites-apps/themes/fedora-mediawiki-theme/-/archive/v%{version}/fedora-mediawiki-theme-v%{version}.tar.gz
+URL:            https://github.com/fedora-infra/fedora-mediawiki-theme/
+Source0:        https://github.com/fedora-infra/fedora-mediawiki-theme/archive/v%{version}/fedora-mediawiki-theme-%{version}.tar.gz
 
 BuildArch:      noarch
 
@@ -32,6 +32,9 @@ cp -a %{_builddir}/fedora-mediawiki-theme-v%{version}/Fedora/ %{buildroot}%{_dat
 %{_datadir}/mediawiki/skins/Fedora
 
 %changelog
+* Wed Jan 15 2025 Ryan Lerch <rlerch@redhat.com> - 0.15-1
+- Updated to latest Fedora Bootstrap version v5.3.3-0
+
 * Fri May 17 2024 Ryan Lerch <rlerch@redhat.com> - 0.14-1
 - Remove use of deprecated printTrail() method
 
