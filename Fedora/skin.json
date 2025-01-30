@@ -1,6 +1,6 @@
 {
 	"name": "Fedora",
-	"version": "0.15",
+	"version": "0.16",
 	"author": "Ryan Lerch <rlerch@redhat.com>",
 	"url": "https://github.com/fedora-infra/fedora-mediawiki-theme/",
 	"descriptionmsg": "fedora-desc",
