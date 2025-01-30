@@ -18,13 +18,13 @@ The mediawiki skin for the Fedora Project wiki
 
 
 %prep
-%setup -q -n fedora-mediawiki-theme-v%{version}
+%setup -q -n fedora-mediawiki-theme-%{version}
 
 %build
 
 %install
 mkdir -p %{buildroot}%{_datadir}/mediawiki/skins/
-cp -a %{_builddir}/fedora-mediawiki-theme-v%{version}/Fedora/ %{buildroot}%{_datadir}/mediawiki/skins/
+cp -a %{_builddir}/fedora-mediawiki-theme-%{version}/Fedora/ %{buildroot}%{_datadir}/mediawiki/skins/
 
 
 %files
