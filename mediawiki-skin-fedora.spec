@@ -1,6 +1,6 @@
 
 Name:           mediawiki-skin-fedora
-Version:        0.16
+Version:        0.17
 Release:        1%{?dist}
 Summary:        Fedora mediawiki skin
 
@@ -32,6 +32,10 @@ cp -a %{_builddir}/fedora-mediawiki-theme-%{version}/Fedora/ %{buildroot}%{_data
 %{_datadir}/mediawiki/skins/Fedora
 
 %changelog
+* Tue Mar 11 2025 Ryan Lerch <rlerch@redhat.com> - 0.17-1
+- Fixes a regression where visited links were coloured the same
+  as the body text.
+
 * Thu Jan 30 2025 Ryan Lerch <rlerch@redhat.com> - 0.16-1
 - Remove underline from links. Previously, the theme for the wiki 
   did not have any text decoration on links, but the recent 
