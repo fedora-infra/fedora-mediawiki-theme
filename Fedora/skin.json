@@ -5,7 +5,7 @@
 	"url": "https://github.com/fedora-infra/fedora-mediawiki-theme/",
 	"descriptionmsg": "fedora-desc",
 	"namemsg": "skinname-fedora",
-	"license-name": "GPLv2+",
+	"license-name": "GPL-2.0-or-later",
 	"type": "skin",
 	"ValidSkinNames": {
 		"fedora": "Fedora"
