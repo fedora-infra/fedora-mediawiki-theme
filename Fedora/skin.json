@@ -17,7 +17,7 @@
 	},
 	"ResourceModules": {
 		"skins.fedora": {
-			"class": "ResourceLoaderSkinModule",
+			"class": "MediaWiki\\ResourceLoader\\SkinModule",
 			"position": "top",
 			"features": {
 				"content-tables": true
