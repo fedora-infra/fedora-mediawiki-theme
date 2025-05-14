@@ -3,8 +3,8 @@
 
 Vagrant.configure(2) do |config|
  config.vm.network "forwarded_port", guest: 80, host: 8080
- config.vm.box_url = "https://download.fedoraproject.org/pub/fedora/linux/releases/39/Cloud/x86_64/images/Fedora-Cloud-Base-Vagrant-39-1.5.x86_64.vagrant-libvirt.box"
- config.vm.box = "f39-cloud-libvirt"
+ config.vm.box_url = "https://download.fedoraproject.org/pub/fedora/linux/releases/42/Cloud/x86_64/images/Fedora-Cloud-Base-Vagrant-libvirt-42-1.1.x86_64.vagrant.libvirt.box"
+ config.vm.box = "f42-cloud-libvirt"
  config.vm.synced_folder "Fedora", "/usr/share/mediawiki/skins/Fedora", type: "sshfs"
 
  # This is a plugin that updates the host's /etc/hosts

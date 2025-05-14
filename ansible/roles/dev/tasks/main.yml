@@ -11,6 +11,7 @@
       - mediawiki
       - postgresql-devel
       - php-pgsql
+      - php-intl
       - httpd
 
 - name: Install the mediawiki.conf apache config file
@@ -33,7 +34,7 @@
 
 - replace:
     dest: /usr/share/mediawiki/LocalSettings.php
-    regexp: "vector"
+    regexp: "vector-2022"
     replace: "fedora"
 
 - lineinfile:
