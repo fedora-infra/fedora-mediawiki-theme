@@ -3,6 +3,7 @@
   become: true
   become_method: sudo
   vars:
+    admin_password: "AdminPassword123!"
   roles:
     - core
     - db

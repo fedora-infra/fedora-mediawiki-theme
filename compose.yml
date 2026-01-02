@@ -1,0 +1,57 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: mediawiki-postgres
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mediawiki-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mediawiki:
+    build:
+      context: .
+      dockerfile: Containerfile
+    container_name: mediawiki-fedora
+    ports:
+      - "8080:80"
+    env_file:
+      - .env
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_PORT: ${DB_PORT}
+      SERVER: ${SERVER}
+      SITENAME: ${SITENAME}
+      ADMIN_USER: ${ADMIN_USER}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+    volumes:
+      # mount the Fedora skin for development
+      - ./Fedora:/usr/share/mediawiki/skins/Fedora:z
+      # persist MediaWiki configuration
+      - mediawiki_data:/usr/share/mediawiki
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - mediawiki-network
+
+volumes:
+  postgres_data:
+  mediawiki_data:
+
+networks:
+  mediawiki-network:
+    driver: bridge
