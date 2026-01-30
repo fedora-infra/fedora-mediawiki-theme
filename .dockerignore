@@ -1,0 +1,35 @@
+# Git
+.git
+.gitignore
+
+# Vagrant
+.vagrant
+Vagrantfile
+
+# Ansible
+ansible/
+
+# Container files
+compose.yml
+docker-compose.yml
+Containerfile
+Dockerfile
+.dockerignore
+
+# Documentation
+*.md
+LICENSE
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.log
+*.swp
+*.swo
+*~

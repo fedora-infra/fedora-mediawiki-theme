@@ -1,2 +1,5 @@
 .vagrant/
 ansible/playbook.retry
+
+# Environment variables
+.env
